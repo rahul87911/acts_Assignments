@@ -1,0 +1,58 @@
+Assignment No. 3
+Create a database named college
+Create a table name student in college database with following structure
+roll,name,class,marks,age with respective datatypes.
+Insert at least 5 rows in the table.
+Delete the entry of roll number 4
+Update the marks of roll number 3
+Give additional grace marks of 0.5 to all students.
+Truncate the table
+Insert the data again using multi-insert statement.
+
+
+
+
+mysql> CREATE DATABASE college;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> CREATE TABLE college.student(
+    -> roll INT NOT NULL,
+    -> name VARCHAR(255) NOT NULL,
+    -> class VARCHAR(50),
+    -> marks INT,
+    -> age INT,
+    -> PRIMARY KEY (roll));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO college.student (roll,name,class,marks,age)VALUES
+    -> (1,'SALONI SINGH','8',99,23),
+    -> (2,'RAHUL MISHRA','8',98,23),
+    -> (3,'SEJAL RASTOGI',8,78,23),
+    -> (4,'SHIVANI SHARMA',9,66,89),
+    -> (5,'AMAN SENPAI',8,67,56);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> DELETE FROM college.student WHERE roll=4;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> UPDATE college.student
+    -> SET marks=89
+    -> WHERE roll=3;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE college.student
+    -> SET marks = marks+0.5;
+Query OK, 4 rows affected (0.02 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> TRUNCATE TABLE college.student;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> INSERT INTO college.student (roll,name,class,marks,age)VALUES
+    -> (1,'JOHN',8,89,23),
+    -> (2,'JOJO',8,89,23);
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+

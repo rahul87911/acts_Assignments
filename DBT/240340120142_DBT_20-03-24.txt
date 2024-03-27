@@ -1,0 +1,66 @@
+Assignment No. 2
+Create a database named college
+Create a table name student in college database with following structure
+roll,name,class,marks,age with respective datatypes.
+Check the structure of the table.
+Alter the datatype of marks from float to integer
+Alter the table to remove the column age
+Show all the tables in database college.
+Truncate the table student
+Drop the table and database also.
+
+
+
+
+mysql> CREATE DATABASE college;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> CREATE TABLE college.student (
+    -> roll INT NOT NULL,
+    -> name VARCHAR(50) NOT NULL,
+    -> class INT,
+    -> marks INT,
+    -> age INT,
+    -> PRIMARY KEY(roll));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESCRIBE college.student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | NO   | PRI | NULL    |       |
+| name  | varchar(50) | NO   |     | NULL    |       |
+| class | int         | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> ALTER TABLE college.student
+    -> MODIFY marks INT;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE college.student
+    -> DROP COLUMN age;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW TABLES FROM college;
++-------------------+
+| Tables_in_college |
++-------------------+
+| student           |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> TRUNCATE TABLE college.student;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> DROP TABLE college.student;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DROP DATABASE college;
+Query OK, 0 rows affected (0.03 sec)
+
+

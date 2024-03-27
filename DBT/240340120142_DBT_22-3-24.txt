@@ -1,0 +1,278 @@
+Q.1 Write a mysql statement to find the name, birth, department name, department block from the given tables.
++----+--------------+------------+------------+
+| id | name | dept_id | birth |
++----+--------------+------------+------------+
+| 1 | Maria Gloria | 2 | 1994-03-12 |
+| 2 | John Smith | 1 | 1993-02-07 |
+| 3 | Gal Rao | 4 | 1992-09-11 |
+| 4 | Jakey Smith | 2 | 1990-08-31 |
+| 5 | Rama Saho | 1 | 1994-12-09 |
+| 6 | Maria Gaga | 4 | 1993-10-09 |
++----+--------------+------------+------------+
++---------+--------------------------+------------+
+| dept_id | dept_name | dept_block |
++---------+--------------------------+------------+
+| 1 | Computer Science | B-Block |
+| 2 | Information Technology | C-Block |
+| 3 | Mechanical | A-Block |
+| 4 | Electronic Communication | D-Block |
++---------+--------------------------+------------+
+
+Answer: select s.name, s.birth, d.dept_name, d.dept_block from student s join department d on s.dept_id = d.dept_id;
+
+Q.2 Write a mysql statement to get name of students containing exactly five characters with ‘a’ as last letter.
+Suppose the student table is -
++----+-------+---------+------------+
+| id |  name  | dept_id |   birth   |
++----+-------+---------+------------+
+| 1  |  Maria |    2    | 1994-03-12|
+| 2  |  John  |    1    | 1993-02-07|
+| 3  |  Gal   |    4    | 1992-09-11|
+| 4  |  Jakey |    2    | 1990-08-31|
+| 5  |  Rama  |    1    | 1994-12-09|
+| 6  |  Maria |    4    | 1993-10-09|
++----+-------+---------+------------+
+
+Answer: select name from student where name like '____a';
+
+Q.3 Write a mysql statement to determine the age of each of the students.
+Suppose the table is -
++----+--------------+------------+------------+
+| id | name | department | birth |
++----+--------------+------------+------------+
+| 1 | Maria Gloria | CS | 1994-03-12 |
+| 2 | John Smith | IT | 1993-02-07 |
+| 3 | Gal Rao | CS | 1992-09-11 |
+| 4 | Jakey Smith | EC | 1990-08-31 |
+| 5 | Rama Saho | IT | 1994-12-09 |
+| 6 | Maria Gaga | EC | 1993-10-09 |
++----+--------------+------------+------------+
+
+Answer: select name, year(CURDATE()) - year(birth) - (DATE_FORMAT(CURDATE(), '%m%d') < DATE_FORMAT(birth, '%m%d')) as age from student;
+
+Q.4 These questions are based on the following two tables, Employee table and Reward table.
+Employee table
++-------------+------------+-----------+----------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary | Joining_date | Departement |
++-------------+------------+-----------+----------+--------------+-------------+
+| 1 | Bob | Kinto | 1000000 | 2019-01-20 | Finance |
+| 2 | Jerry | Kansxo | 6000000 | 2019-01-15 | IT |
+| 3 | Philip | Jose | 8900000 | 2019-02-05 | Banking |
+| 4 | John | Abraham | 2000000 | 2019-02-25 | Insurance |
+| 5 | Michael | Mathew | 2200000 | 2019-02-28 | Finance |
+| 6 | Alex | chreketo | 4000000 | 2019-05-10 | IT |
+| 7 | Yohan | Soso | 1230000 | 2019-06-20 | Banking |
++-------------+------------+-----------+----------+--------------+-------------+
+Reward table
++-----------------+-------------+--------+
+| Employee_ref_id | date_reward | amount |
++-----------------+-------------+--------+
+| 1 | 2019-05-11 | 1000 |
+| 2 | 2019-02-15 | 5000 |
+| 3 | 2019-04-22 | 2000 |
+| 1 | 2019-06-20 | 8000 |
++-----------------+-------------+--------+
+1. Get all employees.
+2. Display the first name and last name of all employees.
+3. Display all the values of the “First_Name” column using the alias “Employee Name”
+4. Get all “Last_Name” in lowercase.
+5. Get all “Last_Name” in uppercase.
+6. Get unique “DEPARTMENT”.
+7. Get the first 4 characters of “FIRST_NAME” column.
+8. Get the position of the letter ‘h’ in ‘John’.
+9. Get all values from the “FIRST_NAME” column after removing white space on the right.
+10. Get all values from the “FIRST_NAME” column after removing white space on the left.
+11. Write the syntax to create the “employee” table.
+
+Answer: 
+
+desync@D3SYNC:~$mysql -u tota -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.36-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE TABLE Employee (
+    ->     Employee_id INT PRIMARY KEY,
+    ->     First_name VARCHAR(255),
+    ->     Last_name VARCHAR(255),
+    ->     Salary DECIMAL(10, 2),
+    ->     Joining_date DATE,
+    ->     Departement VARCHAR(255)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> use college
+Database changed
+mysql> CREATE TABLE Employee (     Employee_id INT PRIMARY KEY,     First_name VARCHAR(255),     Last_name VARCHAR(255),     Salary DECIMAL(10, 2),
+   Joining_date DATE,     Departement VARCHAR(255) );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO Employee (Employee_id, First_name, Last_name, Salary, Joining_date, Departement) VALUES
+    -> (1, 'Bob', 'Kinto', 1000000, '2019-01-20', 'Finance'),
+    -> (2, 'Jerry', 'Kansxo', 6000000, '2019-01-15', 'IT'),
+    -> (3, 'Philip', 'Jose', 8900000, '2019-02-05', 'Banking'),
+    -> (4, 'John', 'Abraham', 2000000, '2019-02-25', 'Insurance'),
+    -> (5, 'Michael', 'Mathew', 2200000, '2019-02-28', 'Finance'),
+    -> (6, 'Alex', 'chreketo', 4000000, '2019-05-10', 'IT'),
+    -> (7, 'Yohan', 'Soso', 1230000, '2019-06-20', 'Banking');
+Query OK, 7 rows affected (0.04 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Reward (
+    ->     Employee_ref_id INT,
+    ->     date_reward DATE,
+    ->     amount DECIMAL(10, 2),
+    ->     FOREIGN KEY (Employee_ref_id) REFERENCES Employee(Employee_id)
+    -> );
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> -- Insert data into Reward table
+mysql> INSERT INTO Reward (Employee_ref_id, date_reward, amount) VALUES
+    -> (1, '2019-05-11', 1000),
+    -> (2, '2019-02-15', 5000),
+    -> (3, '2019-04-22', 2000),
+    -> (1, '2019-06-20', 8000);
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Employee;
++-------------+------------+-----------+------------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary     | Joining_date | Departement |
++-------------+------------+-----------+------------+--------------+-------------+
+|           1 | Bob        | Kinto     | 1000000.00 | 2019-01-20   | Finance     |
+|           2 | Jerry      | Kansxo    | 6000000.00 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000.00 | 2019-02-05   | Banking     |
+|           4 | John       | Abraham   | 2000000.00 | 2019-02-25   | Insurance   |
+|           5 | Michael    | Mathew    | 2200000.00 | 2019-02-28   | Finance     |
+|           6 | Alex       | chreketo  | 4000000.00 | 2019-05-10   | IT          |
+|           7 | Yohan      | Soso      | 1230000.00 | 2019-06-20   | Banking     |
++-------------+------------+-----------+------------+--------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT First_name, Last_name FROM Employee;
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| Bob        | Kinto     |
+| Jerry      | Kansxo    |
+| Philip     | Jose      |
+| John       | Abraham   |
+| Michael    | Mathew    |
+| Alex       | chreketo  |
+| Yohan      | Soso      |
++------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT First_name AS "Employee Name" FROM Employee;
++---------------+
+| Employee Name |
++---------------+
+| Bob           |
+| Jerry         |
+| Philip        |
+| John          |
+| Michael       |
+| Alex          |
+| Yohan         |
++---------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT LOWER(Last_name) FROM Employee;
++------------------+
+| LOWER(Last_name) |
++------------------+
+| kinto            |
+| kansxo           |
+| jose             |
+| abraham          |
+| mathew           |
+| chreketo         |
+| soso             |
++------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(Last_name) FROM Employee;
++------------------+
+| UPPER(Last_name) |
++------------------+
+| KINTO            |
+| KANSXO           |
+| JOSE             |
+| ABRAHAM          |
+| MATHEW           |
+| CHREKETO         |
+| SOSO             |
++------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT Departement FROM Employee;
++-------------+
+| Departement |
++-------------+
+| Finance     |
+| IT          |
+| Banking     |
+| Insurance   |
++-------------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT SUBSTRING(First_name, 1, 4) FROM Employee;
++-----------------------------+
+| SUBSTRING(First_name, 1, 4) |
++-----------------------------+
+| Bob                         |
+| Jerr                        |
+| Phil                        |
+| John                        |
+| Mich                        |
+| Alex                        |
+| Yoha                        |
++-----------------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT LOCATE('h', First_name) FROM Employee WHERE First_name = 'John';
++-------------------------+
+| LOCATE('h', First_name) |
++-------------------------+
+|                       3 |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RTRIM(First_name) FROM Employee;
++-------------------+
+| RTRIM(First_name) |
++-------------------+
+| Bob               |
+| Jerry             |
+| Philip            |
+| John              |
+| Michael           |
+| Alex              |
+| Yohan             |
++-------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT LTRIM(First_name) FROM Employee;
++-------------------+
+| LTRIM(First_name) |
++-------------------+
+| Bob               |
+| Jerry             |
+| Philip            |
+| John              |
+| Michael           |
+| Alex              |
+| Yohan             |
++-------------------+
+7 rows in set (0.00 sec)
+
+
+

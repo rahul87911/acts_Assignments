@@ -1,0 +1,132 @@
+Create a database named college
+Create a table name student in college database with following structure
+roll, name, class, marks, age with respective datatypes and unique constraint on roll, not null on name, marks, check constraint on age check(age>18).
+Insert atleast 5 records in student table.
+Apply the following MySQL clause to this table.
+Alter the constraints to any other constraint.
+ Drop all the Constraints
+Aggregate Functions: 
+SUM(), AVG(), COUNT(), MAX(), MIN(), COUNT(), 
+1. get the total number of students in the student table.
+2. Show the sum of marks of  all students.
+3. Display the student who has got maximum marks
+4. Display the student who has got minimum marks
+5. Show the avg of marks of  all students.
+6. Display min and max age of students.
+Try Group by and Having clauses as explained in session. 
+Using Like, Distinct, Order By, Between...And
+Comparing Nulls, Using IN/Not-In
+
+
+
+
+mysql> CREATE DATABASE college;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> CREATE TABLE college.student(
+    -> roll INT NOT NULL,
+    -> name VARCHAR(255) NOT NULL,
+    -> class INT,
+    -> marks INT NOT NULL,
+    -> age INT,
+    -> PRIMARY KEY(roll),
+    -> UNIQUE(roll),
+    -> CHECK(age>18));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO college.student(roll,name,class,marks,age)VALUES
+    -> (1,'SALONI SINGH',8,99,23),
+    -> (2,'RAHUL MISHRA',8,98,23),
+    -> (3,'SEJAL RASTOGI',8,76,89),
+    -> (4,'SHIVANI SHARMA',9,79,89),
+    -> (5,'AMAN SENPAI',9,09,98);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE college.student
+    -> DROP INDEX roll,
+    -> ADD CONSTRAINT name UNIQUE(name);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE college.student
+    -> DROP INDEX name;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT COUNT(*) AS students FROM college.student;
++----------+
+| students |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(marks) AS total_marks FROM college.student;
++-------------+
+| total_marks |
++-------------+
+|         361 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM college.student WHERE marks = (SELECT MAX(marks) FROM college.student);
++------+--------------+-------+-------+------+
+| roll | name         | class | marks | age  |
++------+--------------+-------+-------+------+
+|    1 | SALONI SINGH |     8 |    99 |   23 |
++------+--------------+-------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM college.student WHERE marks = (SELECT MIN(marks) FROM college.student);
++------+-------------+-------+-------+------+
+| roll | name        | class | marks | age  |
++------+-------------+-------+-------+------+
+|    5 | AMAN SENPAI |     9 |     9 |   98 |
++------+-------------+-------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(marks) AS average_marks FROM college.student;
++---------------+
+| average_marks |
++---------------+
+|       72.2000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(age) AS min_age, MAX(age) AS max_age FROM college.student;
++---------+---------+
+| min_age | max_age |
++---------+---------+
+|      23 |      98 |
++---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT class, SUM(marks) AS total_marks
+    -> FROM college.student
+    -> GROUP BY class
+    -> HAVING AVG(marks)>80;
++-------+-------------+
+| class | total_marks |
++-------+-------------+
+|     8 |         273 |
++-------+-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT DISTINCT name FROM college.student WHERE marks BETWEEN 70 AND 90;
++----------------+
+| name           |
++----------------+
+| SEJAL RASTOGI  |
+| SHIVANI SHARMA |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM college.student
+    -> WHERE age is NULL
+    -> OR age IN(20,21);
+Empty set (0.00 sec)
+
+mysql> 
+
+
