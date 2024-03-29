@@ -20,17 +20,17 @@ public:
     }
 
     // Overloading + operator for addition
-    Complex operator+( Complex& other)  {
+    Complex operator+( const Complex& other) const {
         return Complex(real + other.real, imaginary + other.imaginary);
     }
 
     // Overloading - operator for subtraction
-    Complex operator-( Complex& other)  {
+    Complex operator-( const Complex& other)  const {
         return Complex(real - other.real, imaginary - other.imaginary);
     }
 
     // Overloading * operator for multiplication
-    Complex operator*( Complex& other)  {
+    Complex operator*( const Complex& other) const {
         int newReal = (real * other.real) - (imaginary * other.imaginary);
         int newImaginary = (real * other.imaginary) + (imaginary * other.real);
         return Complex(newReal, newImaginary);
@@ -51,12 +51,12 @@ public:
     }
     
     //overloading == operator
-    bool operator==(Complex &other) {
+    bool operator==(const Complex &other) const {
         return (real == other.real) && (imaginary == other.imaginary);
     }
     
     //overloading != operator
-    bool operator!=(Complex &other) {
+    bool operator!=(const Complex &other) const {
         return !(*this == other);
     }
 
@@ -75,8 +75,7 @@ int main() {
     Complex result_add = c1 + c2;
     Complex result_sub = c1 - c2;
     Complex result_mul = c1 * c2;
-    Complex result_eq  = c1 == c2;
-    Complex result_neq = c1 != c2;
+
 
     // Display results
     cout << "Addition result: ";
@@ -88,12 +87,6 @@ int main() {
     cout << "Multiplication result: ";
     result_mul.display();
     
-    cout << "Equality result: ";
-    cout<<endl<<result_eq;
-    
-    cout << "Inequality result: ";
-    cout<<endl<<result_neq;
-
     // Test pre and post increment operators
     cout << "Initial c1: ";
     c1.display();
@@ -104,6 +97,11 @@ int main() {
     cout << "After post-incrementing c1: ";
     c1.display();
 
+    //Test for equality
+    if(c1==c2)
+    cout<<"Both are equal !!"<<endl;
+    else
+    cout<<"Not equal"<<endl;
     return 0;
 }
 
