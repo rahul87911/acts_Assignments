@@ -1,0 +1,105 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use college;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| student           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select *  from student;
++------+----------------+-------+-------+------+
+| roll | name           | class | marks | age  |
++------+----------------+-------+-------+------+
+|    1 | SALONI SINGH   |     8 |    99 |   23 |
+|    2 | RAHUL MISHRA   |     8 |    98 |   23 |
+|    3 | SEJAL RASTOGI  |     8 |    76 |   89 |
+|    4 | SHIVANI SHARMA |     9 |    79 |   89 |
+|    5 | AMAN SENPAI    |     9 |     9 |   98 |
+|    6 | Rishav         |     9 |    56 |   54 |
+|    7 | Sachin         |     8 |    54 |   23 |
++------+----------------+-------+-------+------+
+7 rows in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE GetStudentsInRange(IN min_marks DECIMAL(5, 2), IN max_marks DECIMAL(5, 2))
+    -> BEGIN
+    ->     SELECT name
+    ->     FROM student
+    ->     WHERE marks BETWEEN min_marks AND max_marks;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE StudentSummary()
+    -> BEGIN
+    ->     SELECT 
+    ->         SUM(marks) AS total_marks,
+    ->         AVG(marks) AS average_marks,
+    ->         MIN(marks) AS min_marks,
+    ->         MAX(marks) AS max_marks
+    ->     FROM student;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE GetMarksByRoll(IN student_roll INT)
+    -> BEGIN
+    ->     SELECT marks
+    ->     FROM student
+    ->     WHERE roll = student_roll;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE GetAverageMarksInRange(IN min_roll INT, IN max_roll INT)
+    -> BEGIN
+    ->     SELECT AVG(marks) AS average_marks
+    ->     FROM student
+    ->     WHERE roll BETWEEN min_roll AND max_roll;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE CountStudentsBelow70Percent()
+    -> BEGIN
+    ->     SELECT COUNT(*) AS count_below_70_percent
+    ->     FROM student
+    ->     WHERE marks < 70;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> 
+
