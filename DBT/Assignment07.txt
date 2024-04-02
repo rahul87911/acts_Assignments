@@ -1,0 +1,360 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database employee;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use employee;
+mysql> 
+mysql> Create Table Employee
+    -> (Empid int, EmpName varchar(50),
+    -> Department varchar(50), ContactNo varchar(50),
+    -> EmailId varchar(50),EmpHeadId int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into Employee(Empid,EmpName,Department,ContactNo,EmailId,EmpHeadId) Values (101,'Isha','E-101','1234567890','isha@gmail.com',105), (102,'Priya','E-104','1234567890','priya@yahoo.com',103), (103,'Neha','E-101','1234567890','neha@gmail.com',101), (104,'Rahul','E-102','1234567890','rahul@yahoo.com',105), (105,'Abhishek','E-101','1234567890','abhishek@gmail.com',102);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++-------+----------+------------+------------+--------------------+-----------+
+| Empid | EmpName  | Department | ContactNo  | EmailId            | EmpHeadId |
++-------+----------+------------+------------+--------------------+-----------+
+|   101 | Isha     | E-101      | 1234567890 | isha@gmail.com     |       105 |
+|   102 | Priya    | E-104      | 1234567890 | priya@yahoo.com    |       103 |
+|   103 | Neha     | E-101      | 1234567890 | neha@gmail.com     |       101 |
+|   104 | Rahul    | E-102      | 1234567890 | rahul@yahoo.com    |       105 |
+|   105 | Abhishek | E-101      | 1234567890 | abhishek@gmail.com |       102 |
++-------+----------+------------+------------+--------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> create table EmpDept(DeptId varchar(10),DeptName varchar(20),Dept_off varchar(20),DeptHead varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into EmpDept(DeptId,DeptName,Dept_off,DeptHead) values
+    -> ('E-101','HR','Monday',105),
+    -> ('E-102','Development','Tuesday',101),
+    -> ('E-103','House Keeping','Saturday',103),
+    -> ('E-104','Sales','Sunday',104),
+    -> ('E-105','Purchase','Tuesday',104);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from EmpDept;
++--------+---------------+----------+----------+
+| DeptId | DeptName      | Dept_off | DeptHead |
++--------+---------------+----------+----------+
+| E-101  | HR            | Monday   | 105      |
+| E-102  | Development   | Tuesday  | 101      |
+| E-103  | House Keeping | Saturday | 103      |
+| E-104  | Sales         | Sunday   | 104      |
+| E-105  | Purchase      | Tuesday  | 104      |
++--------+---------------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> create table EmpSalary(EmpId int, Salary int, IsPermanent varchar(10));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into EmpSalary(EmpId,Salary,IsPermanent) values
+    -> (101,2000,'Yes'),
+    -> (102,10000,'Yes'),
+    -> (103,5000,'No'),
+    -> (104,1900,'Yes'),
+    -> (105,2300,'Yes');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from EmpSalary;
++-------+--------+-------------+
+| EmpId | Salary | IsPermanent |
++-------+--------+-------------+
+|   101 |   2000 | Yes         |
+|   102 |  10000 | Yes         |
+|   103 |   5000 | No          |
+|   104 |   1900 | Yes         |
+|   105 |   2300 | Yes         |
++-------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create table Project(ProjectId varchar(10), Duration int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into Project(ProjectId,Duration) values
+    -> ('p-1',23),
+    -> ('p-2',15),
+    -> ('p-3',45),
+    -> ('p-4',2),
+    -> ('p-5',30);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Project;
++-----------+----------+
+| ProjectId | Duration |
++-----------+----------+
+| p-1       |       23 |
+| p-2       |       15 |
+| p-3       |       45 |
+| p-4       |        2 |
+| p-5       |       30 |
++-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> create table Country(cid varchar(10), cname varchar(10));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into Country(cid,cname) values
+    -> ('c-1','India'),
+    -> ('c-2','USA'),
+    -> ('c-3','China'),
+    -> ('c-4','Pakistan'),
+    -> ('c-5','Russia');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Country;
++------+----------+
+| cid  | cname    |
++------+----------+
+| c-1  | India    |
+| c-2  | USA      |
+| c-3  | China    |
+| c-4  | Pakistan |
+| c-5  | Russia   |
++------+----------+
+5 rows in set (0.00 sec)
+
+mysql> create table ClientTable(ClientId varchar(10), ClientName varchar(10), cid varchar(10));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into ClientTable(ClientId,ClientName,cid) values
+    -> ('cl-1','ABC Group','c-1'),
+    -> ('cl-2','PQR','c-1'),
+    -> ('cl-3','XYZ','c-2'),
+    -> ('cl-4','tech altum','c-3'),
+    -> ('cl-5','mnp','c-5');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from ClientTable;
++----------+------------+------+
+| ClientId | ClientName | cid  |
++----------+------------+------+
+| cl-1     | ABC Group  | c-1  |
+| cl-2     | PQR        | c-1  |
+| cl-3     | XYZ        | c-2  |
+| cl-4     | tech altum | c-3  |
+| cl-5     | mnp        | c-5  |
++----------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> create table EmpProject(EmpId int, ProjectId varchar(10),ClientId varchar(10),StartYear int,EndYear int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into EmpProject(EmpId,ProjectId,ClientId,StartYear,EndYear) values
+    -> (101,'p-1','Cl-1',2010,2010),
+    -> (102,'p-2','Cl-2',2010,2012),
+    -> (103,'p-1','Cl-3',2013,NULL),
+    -> (104,'p-4','Cl-1',2014,2015),
+    -> (105,'p-5','Cl-5',2015,NULL);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from EmpProject;
++-------+-----------+----------+-----------+---------+
+| EmpId | ProjectId | ClientId | StartYear | EndYear |
++-------+-----------+----------+-----------+---------+
+|   101 | p-1       | Cl-1     |      2010 |    2010 |
+|   102 | p-2       | Cl-2     |      2010 |    2012 |
+|   103 | p-1       | Cl-3     |      2013 |    NULL |
+|   104 | p-4       | Cl-1     |      2014 |    2015 |
+|   105 | p-5       | Cl-5     |      2015 |    NULL |
++-------+-----------+----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+mysql> SELECT * FROM Employee where EmpName Like 'P%';
++-------+---------+------------+------------+-----------------+-----------+
+| Empid | EmpName | Department | ContactNo  | EmailId         | EmpHeadId |
++-------+---------+------------+------------+-----------------+-----------+
+|   102 | Priya   | E-104      | 1234567890 | priya@yahoo.com |       103 |
++-------+---------+------------+------------+-----------------+-----------+
+1 row in set (0.01 sec)
+
+mysql> select COUNT(*) from EmpSalary where IsPermanent = 'Yes' and Salary >5000;
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from Employee where EmailId like '%@gmail.com';
++-------+----------+------------+------------+--------------------+-----------+
+| Empid | EmpName  | Department | ContactNo  | EmailId            | EmpHeadId |
++-------+----------+------------+------------+--------------------+-----------+
+|   101 | Isha     | E-101      | 1234567890 | isha@gmail.com     |       105 |
+|   103 | Neha     | E-101      | 1234567890 | neha@gmail.com     |       101 |
+|   105 | Abhishek | E-101      | 1234567890 | abhishek@gmail.com |       102 |
++-------+----------+------------+------------+--------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Employee where Department in ('E-104','E-102');
++-------+---------+------------+------------+-----------------+-----------+
+| Empid | EmpName | Department | ContactNo  | EmailId         | EmpHeadId |
++-------+---------+------------+------------+-----------------+-----------+
+|   102 | Priya   | E-104      | 1234567890 | priya@yahoo.com |       103 |
+|   104 | Rahul   | E-102      | 1234567890 | rahul@yahoo.com |       105 |
++-------+---------+------------+------------+-----------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select DeptName from EmpDept where DeptId = 'E-102';
++-------------+
+| DeptName    |
++-------------+
+| Development |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select sum(Salary) from EmpSalary where IsPermanent = 'Yes';
++-------------+
+| sum(Salary) |
++-------------+
+|       16200 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> Select EmpName from Employee where EmpName Like '%a';
++---------+
+| EmpName |
++---------+
+| Isha    |
+| Priya   |
+| Neha    |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select EP.ProjectId, count(distinct ED.DeptId) as NumDepartments from EmpProject EP join Employee E on EP.EmpId= E.Empid join EmpDept ED on E.Department = ED.DeptId Group By EP.ProjectId;
++-----------+----------------+
+| ProjectId | NumDepartments |
++-----------+----------------+
+| p-1       |              1 |
+| p-2       |              1 |
+| p-4       |              2 |
++-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) from EmpProject where StartYear=2010;
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from EmpProject where StartYear=EndYear;
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select EmpName from Employee where substring(EmpName , 3,1) = 'h';
++----------+
+| EmpName  |
++----------+
+| Isha     |
+| Neha     |
+| Rahul    |
+| Abhishek |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select DeptName from EmpDept where DeptId in (select Department from Employee where EmpId >103);
++-------------+
+| DeptName    |
++-------------+
+| HR          |
+| Development |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> select EmpName from Employee where EmpHeadId=(select Empid from Employee where EmpName='Abhishek');
++---------+
+| EmpName |
++---------+
+| Isha    |
+| Rahul   |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> select EmpName from Employee where Empid = (select DeptHead from EmpDept where DeptName ='HR');
++----------+
+| EmpName  |
++----------+
+| Abhishek |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select EmpName from Employee where Empid in (select Empid from EmpSalary where Ispermanent='Yes');
++----------+
+| EmpName  |
++----------+
+| Isha     |
+| Priya    |
+| Rahul    |
+| Abhishek |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select EmpName, EmailId from Employee where Empid in (select DeptHead from EmpDept where DeptHead in (select Empid from EmpSalary where IsPermanent='No'));
++---------+----------------+
+| EmpName | EmailId        |
++---------+----------------+
+| Neha    | neha@gmail.com |
++---------+----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from Employee where Department in (select DeptId from EmpDept where Dept_off='Monday');
++-------+----------+------------+------------+--------------------+-----------+
+| Empid | EmpName  | Department | ContactNo  | EmailId            | EmpHeadId |
++-------+----------+------------+------------+--------------------+-----------+
+|   101 | Isha     | E-101      | 1234567890 | isha@gmail.com     |       105 |
+|   103 | Neha     | E-101      | 1234567890 | neha@gmail.com     |       101 |
+|   105 | Abhishek | E-101      | 1234567890 | abhishek@gmail.com |       102 |
++-------+----------+------------+------------+--------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from ClientTable where cid='c-1';
++----------+------------+------+
+| ClientId | ClientName | cid  |
++----------+------------+------+
+| cl-1     | ABC Group  | c-1  |
+| cl-2     | PQR        | c-1  |
++----------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from Employee where Department = 'E-102';
++-------+---------+------------+------------+-----------------+-----------+
+| Empid | EmpName | Department | ContactNo  | EmailId         | EmpHeadId |
++-------+---------+------------+------------+-----------------+-----------+
+|   104 | Rahul   | E-102      | 1234567890 | rahul@yahoo.com |       105 |
++-------+---------+------------+------------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+
+
+
