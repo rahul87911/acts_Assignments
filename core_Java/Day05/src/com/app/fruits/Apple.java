@@ -12,23 +12,7 @@ public class Apple extends Fruits {
 		return "sweet n sour";
 	}
 
-	 @Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return super.getColor();
-	}
-
-	@Override
-	public double getWeight() {
-		// TODO Auto-generated method stub
-		return super.getWeight();
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return super.getName();
-	}
+	
 
 	@Override
 	public boolean getFresh() {

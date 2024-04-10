@@ -2,24 +2,7 @@ package com.app.fruits;
 
 public class Orange extends Fruits {
 
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return super.getColor();
-	}
-
-	@Override
-	public double getWeight() {
-		// TODO Auto-generated method stub
-		return super.getWeight();
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return super.getName();
-	}
-
+	
 	@Override
 	public boolean getFresh() {
 		// TODO Auto-generated method stub

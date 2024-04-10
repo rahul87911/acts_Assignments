@@ -58,7 +58,7 @@ public class FruitBasket {
 	            	   System.out.println("Enter the weight of Orange :");
 	            	   double weight1=sc.nextDouble();
 	            	   
-	            	   fruit[counter]=new Mango(color1,weight1,name1,true);
+	            	   fruit[counter]=new Orange(color1,weight1,name1,true);
 	            	   counter++;
 	            	   System.out.println("Orange added in Basket !");
 	            	   }else {
@@ -74,7 +74,7 @@ public class FruitBasket {
 	            	   System.out.println("Enter the weight of Apple :");
 	            	   double weight2=sc.nextDouble();
 	            	   
-	            	   fruit[counter]=new Mango(color2,weight2,name2,true);
+	            	   fruit[counter]=new Apple(color2,weight2,name2,true);
 	            	   counter++;
 	            	   System.out.println("Apple added in Basket !");
 	            	   }else {
@@ -141,6 +141,8 @@ public class FruitBasket {
 	            }
 	            
 		}
+		
+		
 		sc.close();
 	}
 

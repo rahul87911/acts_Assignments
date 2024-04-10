@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f4641d2-d3cb-48ec-93bf-a9dc87af3737" name="Changes" comment="" />
+    <list default="true" id="2f4641d2-d3cb-48ec-93bf-a9dc87af3737" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../knowit/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/.classpath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/bin/com/cdac/staff/Programmer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/bin/com/cdac/staff/SalesManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/bin/com/cdac/utility/Employee.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/bin/module-info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/com/cdac/staff/Programmer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/com/cdac/staff/SalesManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/com/cdac/utility/Date.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/com/cdac/utility/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/com/cdac/utility/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../knowit/ass1/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CPP/CW/CPPSlides/6_Pointers and Memory Management.ppt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CPP/CW/CPPSlides/6_Pointers and Memory Management.ppt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Apple.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Apple.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Mango.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Mango.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Orange.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/bin/com/app/fruits/Orange.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/bin/com/app/tester/FruitBasket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/bin/com/app/tester/FruitBasket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Apple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Mango.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Mango.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Orange.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/src/com/app/fruits/Orange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day05/src/com/app/tester/FruitBasket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day05/src/com/app/tester/FruitBasket.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,13 +67,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-11.0.22-semeru-11.0.22-e1d2075fd9a7-24488771" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
