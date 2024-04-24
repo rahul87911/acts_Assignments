@@ -3,20 +3,21 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   AccountType.java
 
-package enums;
+package com.app.banking;
 
 
 public final class AccountType extends Enum
 {
 
-    private AccountType(String s, int i)
+    private AccountType(String s, int i, double minBalance)
     {
         super(s, i);
+        this.minBalance = minBalance;
     }
 
     public String toString()
     {
-        return name().toLowerCase();
+        return (new StringBuilder(String.valueOf(name()))).append(":").append(minBalance).toString();
     }
 
     public static AccountType[] values()
@@ -30,25 +31,26 @@ public final class AccountType extends Enum
 
     public static AccountType valueOf(String s)
     {
-        return (AccountType)Enum.valueOf(enums/AccountType, s);
+        return (AccountType)Enum.valueOf(com/app/banking/AccountType, s);
     }
 
     public static final AccountType SAVING;
     public static final AccountType CURRENT;
     public static final AccountType FD;
-    public static final AccountType DMAT;
     public static final AccountType LOAN;
+    public static final AccountType DMAT;
+    private double minBalance;
     private static final AccountType ENUM$VALUES[];
 
     static 
     {
-        SAVING = new AccountType("SAVING", 0);
-        CURRENT = new AccountType("CURRENT", 1);
-        FD = new AccountType("FD", 2);
-        DMAT = new AccountType("DMAT", 3);
-        LOAN = new AccountType("LOAN", 4);
+        SAVING = new AccountType("SAVING", 0, 10000D);
+        CURRENT = new AccountType("CURRENT", 1, 3000D);
+        FD = new AccountType("FD", 2, 50000D);
+        LOAN = new AccountType("LOAN", 3, 25000D);
+        DMAT = new AccountType("DMAT", 4, 15000D);
         ENUM$VALUES = (new AccountType[] {
-            SAVING, CURRENT, FD, DMAT, LOAN
+            SAVING, CURRENT, FD, LOAN, DMAT
         });
     }
 }
