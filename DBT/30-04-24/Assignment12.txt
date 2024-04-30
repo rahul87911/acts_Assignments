@@ -1,0 +1,24 @@
+mysql> create database employees;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use employees
+Database changed
+mysql> CREATE TABLE employees (  eid INT PRIMARY KEY,  name VARCHAR(255) NOT NULL,  experience INT,  salary DECIMAL(10,2) NOT NULL);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO employees (eid, name, experience, salary)VALUES (101, 'Vijay', 12, 56000),       (103, 'Rani', 0, 14000),       (104, 'Ramesh', 6, 45000),       (105, 'Anil', 5, 34600),       (107, 'Akash', 14, 67800),       (108, 'Priya', 7, 60000);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-----+--------+------------+----------+
+| eid | name   | experience | salary   |
++-----+--------+------------+----------+
+| 101 | Vijay  |         12 | 56000.00 |
+| 103 | Rani   |          0 | 14000.00 |
+| 104 | Ramesh |          6 | 45000.00 |
+| 105 | Anil   |          5 | 34600.00 |
+| 107 | Akash  |         14 | 67800.00 |
+| 108 | Priya  |          7 | 60000.00 |
++-----+--------+------------+----------+
+6 rows in set (0.00 sec)

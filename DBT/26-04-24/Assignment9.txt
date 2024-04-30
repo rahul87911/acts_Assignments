@@ -1,0 +1,210 @@
+mysql> create database college;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table student
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> use student;
+ERROR 1049 (42000): Unknown database 'student'
+mysql> use database college;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use college;
+Database changed
+mysql> create table student (roll int,name varchar(100),class varchar(100), marks int, age int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| roll  | int          | YES  |     | NULL    |       |
+| name  | varchar(100) | YES  |     | NULL    |       |
+| class | varchar(100) | YES  |     | NULL    |       |
+| marks | int          | YES  |     | NULL    |       |
+| age   | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+mysql> INSERT INTO student (roll, name, class, marks, age) VALUES
+    ->   (1, 'Alice', 'VI', 85.5, 16),
+    ->   (2, 'Bob', 'VII', 78.2, 17),
+    ->   (3, 'Charlie', 'VIII', 92.1, 18),
+    ->   (4, 'David', 'V', 67.8, 15),
+    ->   (5, 'Eve', 'IX', 89.4, 19),
+    ->   (6, 'Frank', 'X', 72.5, 20),
+    ->   (7, 'Grace', 'VIII', 88.7, 18);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+---------+-------+-------+------+
+| roll | name    | class | marks | age  |
++------+---------+-------+-------+------+
+|    1 | Alice   | VI    |    86 |   16 |
+|    2 | Bob     | VII   |    78 |   17 |
+|    3 | Charlie | VIII  |    92 |   18 |
+|    4 | David   | V     |    68 |   15 |
+|    5 | Eve     | IX    |    89 |   19 |
+|    6 | Frank   | X     |    73 |   20 |
+|    7 | Grace   | VIII  |    89 |   18 |
++------+---------+-------+-------+------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO student (roll, name, class, marks, age) VALUES
+    ->   (8, 'Alan', 'VI', 61, 16),
+    ->   (9, 'Alan', 'VI', 57, 16),
+    ->   (10, 'Anisha', 'VII', 46, 19);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select if(marks > 70) as First_Class from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') as First_Class from student' at line 1
+mysql> select if(marks > 70, 'Yes','No') as First_Class from student;
++-------------+
+| First_Class |
++-------------+
+| Yes         |
+| Yes         |
+| Yes         |
+| No          |
+| Yes         |
+| Yes         |
+| Yes         |
+| No          |
+| No          |
+| No          |
++-------------+
+10 rows in set (0.00 sec)
+
+
+mysql> select if(marks > 75, 'A+',
+    -> if(marks>60, 'A',
+    -> if(marks>55, 'B+',
+    -> if(marks>50, 'B',
+    -> if(marks>40, 'C','D')))))
+    -> as Grade from student;
++-------+
+| Grade |
++-------+
+| A+    |
+| A+    |
+| A+    |
+| A     |
+| A+    |
+| A     |
+| A+    |
+| A     |
+| B+    |
+| C     |
++-------+
+10 rows in set (0.00 sec)
+
+
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE addition()
+    -> BEGIN
+    ->  declare n int default 1;
+    ->  declare sum int default 0;
+    ->  addLoop : loop
+    ->   if (n > 10) then
+    ->   leave addLoop;
+    ->   end if;
+    ->   set sum = sum + n;
+    ->   set n = n + 1;
+    ->  end loop;
+    ->  select sum;
+    -> end
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call addition();
++------+
+| sum  |
++------+
+|   55 |
++------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create procedure chkOddEven(in num int)
+    -> begin
+    -> declare type varchar(10) default '';
+    -> if num % 2 = 0 then
+    ->  set type = 'Even';
+    -> elseif num % 2 !=0 then
+    ->  set type = 'Odd';
+    -> else
+    ->   set type = 'Zero';
+    -> end if;
+    -> select type;
+    -> end
+    -> $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call chkOddEven(8);
++------+
+| type |
++------+
+| Even |
++------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call chkOddEven(9);
++------+
+| type |
++------+
+| Odd  |
++------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop procedure findGrade;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter $
+mysql> create procedure findGrade()
+    -> begin
+    -> select *,
+    ->   case
+    ->    when marks > 75 then 'A+'
+    ->    when marks > 60 then 'A'
+    ->    when marks > 55 then 'B+'
+    ->    when marks > 50 then 'B'
+    ->    when marks > 40 then 'C'
+    ->    when marks < 40 then 'D'
+    ->   end as grade
+    -> from student;
+    -> end
+    -> $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call findGrade;
++------+---------+-------+-------+------+-------+
+| roll | name    | class | marks | age  | grade |
++------+---------+-------+-------+------+-------+
+|    1 | Alice   | VI    |    86 |   16 | A+    |
+|    2 | Bob     | VII   |    78 |   17 | A+    |
+|    3 | Charlie | VIII  |    92 |   18 | A+    |
+|    4 | David   | V     |    68 |   15 | A     |
+|    5 | Eve     | IX    |    89 |   19 | A+    |
+|    6 | Frank   | X     |    73 |   20 | A     |
+|    7 | Grace   | VIII  |    89 |   18 | A+    |
+|    8 | Alan    | VI    |    61 |   16 | A     |
+|    9 | Alan    | VI    |    57 |   16 | B+    |
+|   10 | Anisha  | VII   |    46 |   19 | C     |
++------+---------+-------+-------+------+-------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
