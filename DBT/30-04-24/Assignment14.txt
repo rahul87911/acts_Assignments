@@ -1,0 +1,732 @@
+Microsoft Windows [Version 10.0.19045.4291]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dac>mongosh
+Current Mongosh Log ID: 66323e543fb971de2246b798
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2024-05-01T18:31:52.288+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+test> use AnirudhDb
+switched to db AnirudhDb
+AnirudhDb> exit
+
+C:\Users\dac>mongosh
+Current Mongosh Log ID: 66323ea0a57b2aa71746b798
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-01T18:31:52.288+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+test> use Assignment14
+switched to db Assignment14
+
+Assignment14> show dbs
+Assignment14   8.00 KiB
+admin         40.00 KiB
+config        60.00 KiB
+local         40.00 KiB
+Assignment14> show collections
+books
+
+
+Assignment14> db.books.insertOne({ refno: 1001, name: "Python Prog", author:"Shyam", coauthor:"Rakesh" , pages:350, price: 450 });
+{
+  acknowledged: true,
+  insertedId: ObjectId('663241cca57b2aa71746b79a')
+}
+Assignment14> db.books.insertOne({ refno: 1002, name: "Java Prog", author:"Asmita", pages:300, price: 500 });
+{
+  acknowledged: true,
+  insertedId: ObjectId('663241cca57b2aa71746b79b')
+}
+Assignment14> db.books.insertOne({ refno: 1003, name: "HTML", author:"Asmita", coauthor:"Shyam", pages:225, price: 300 });
+{
+  acknowledged: true,
+  insertedId: ObjectId('663241cca57b2aa71746b79c')
+}
+Assignment14> db.books.insertOne({ refno: 1004, name: "MonggoDB", author:"Shyam", pages:440, pprice: 500 });
+{
+  acknowledged: true,
+  insertedId: ObjectId('663241cca57b2aa71746b79d')
+}
+Assignment14> db.books.insertOne({ refno: 1005, name: "MySQL", author:"Shrikant", coauthor:"Nitin", pages:330, price: 630 });
+{
+  acknowledged: true,
+  insertedId: ObjectId('663241d0a57b2aa71746b79e')
+}
+
+
+Assignment14> db.books.find({ author:"Asmita" });
+[
+  {
+    _id: ObjectId('663241cca57b2aa71746b79b'),
+    refno: 1002,
+    name: 'Java Prog',
+    author: 'Asmita',
+    pages: 300,
+    price: 500
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79c'),
+    refno: 1003,
+    name: 'HTML',
+    author: 'Asmita',
+    coauthor: 'Shyam',
+    pages: 225,
+    price: 300
+  }
+]
+
+
+Assignment14> db.books.countDocuments( { author:"Asmita" });
+2
+
+
+Assignment14> db.books.find({  $or: [    { author:"Shyam" },    { coauthor:"Shyam"}  ]});
+[
+  {
+    _id: ObjectId('663241cca57b2aa71746b79a'),
+    refno: 1001,
+    name: 'Python Prog',
+    author: 'Shyam',
+    coauthor: 'Rakesh',
+    pages: 350,
+    price: 450
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79c'),
+    refno: 1003,
+    name: 'HTML',
+    author: 'Asmita',
+    coauthor: 'Shyam',
+    pages: 225,
+    price: 300
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79d'),
+    refno: 1004,
+    name: 'MonggoDB',
+    author: 'Shyam',
+    pages: 440,
+    price: 500
+  }
+]
+Assignment14> db.books.countDocuments( {  $or: [    { author:"Shyam" },    { coauthor:"Shyam"}  ]} );
+3
+
+
+Assignment14> countDistinct  =  db.books.distinct("author");
+[ 'Asmita', 'Shrikant', 'Shyam' ]
+Assignment14> print("Total number of author's books in library are: "+ countDistinct.length);
+Total number of author's books in library are: 3
+
+
+Assignment14> db.books.aggregate([  { $group: { _id: null, averageValue: { $avg: "$price" } } }  ]);
+[ { _id: null, averageValue: 476 } ]
+
+
+Assignment14> db.books.aggregate([  { $match: { author: "Shyam" } },   { $group: { _id: null , count: { $sum: "$pages" } } } ])
+[ { _id: null, count: 790 } ]
+
+
+
+Assignment14> db.books.find().sort({ pages: -1 });
+[
+  {
+    _id: ObjectId('663241cca57b2aa71746b79d'),
+    refno: 1004,
+    name: 'MonggoDB',
+    author: 'Shyam',
+    pages: 440,
+    price: 500
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79a'),
+    refno: 1001,
+    name: 'Python Prog',
+    author: 'Shyam',
+    coauthor: 'Rakesh',
+    pages: 350,
+    price: 450
+  },
+  {
+    _id: ObjectId('663241d0a57b2aa71746b79e'),
+    refno: 1005,
+    name: 'MySQL',
+    author: 'Shrikant',
+    coauthor: 'Nitin',
+    pages: 330,
+    price: 630
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79b'),
+    refno: 1002,
+    name: 'Java Prog',
+    author: 'Asmita',
+    pages: 300,
+    price: 500
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79c'),
+    refno: 1003,
+    name: 'HTML',
+    author: 'Asmita',
+    coauthor: 'Shyam',
+    pages: 225,
+    price: 300
+  }
+]
+
+
+Assignment14> db.books.find({price:{$gt:400}})
+[
+  {
+    _id: ObjectId('663241cca57b2aa71746b79a'),
+    refno: 1001,
+    name: 'Python Prog',
+    author: 'Shyam',
+    coauthor: 'Rakesh',
+    pages: 350,
+    price: 450
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79b'),
+    refno: 1002,
+    name: 'Java Prog',
+    author: 'Asmita',
+    pages: 300,
+    price: 500
+  },
+  {
+    _id: ObjectId('663241cca57b2aa71746b79d'),
+    refno: 1014,
+    name: 'MongoDB',
+    author: 'Shyam',
+    pages: 440,
+    price: 500
+  },
+  {
+    _id: ObjectId('663241d0a57b2aa71746b79e'),
+    refno: 1005,
+    name: 'MySQL',
+    author: 'Shrikant',
+    coauthor: 'Nitin',
+    pages: 330,
+    price: 630
+  }
+]
+Assignment14> db.books.updateOne( { name:"MonggoDB" } , { $set:{ name:"MongoDB" } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Assignment14> db.books.updateOne( { name:"MongoDB" } , { $set:{refno: 1014 } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+Assignment14> db.books.updateOne( { name:"MySQL" } , { $unset:{coauthor: '' } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+
+
+
+
+
+*****************************************************************
+
+
+
+
+Microsoft Windows [Version 10.0.19045.4291]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dac>mongoah
+'mongoah' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\dac>mongosh
+Current Mongosh Log ID: 66335ddd149145886046b798
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-01T18:31:52.288+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.Cricketer.find()
+
+test> db.Cricketer.find();
+
+test> show collections
+
+test> show dbs
+Assignment14  112.00 KiB
+admin          40.00 KiB
+config        108.00 KiB
+local          40.00 KiB
+test> use Assignment14
+switched to db Assignment14
+Assignment14> show collections
+books
+Cricketer
+Assignment14> db.Cricketer.find();
+[
+  {
+    _id: ObjectId('6633595571b00d138446b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  }
+]
+Assignment14> db.Cricketer.insertOne({  name: "Ajay", matches:58, runs:2009,catches: 32});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335e8b149145886046b799')
+}
+Assignment14> db.Cricketer.insertOne({  name: "Vijay", matches:32, runs:4205,catches: 11});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335eb5149145886046b79a')
+}
+Assignment14> db.Cricketer.insertOne({  name: "ram", matches:230, runs:6490,catches: 105});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335ede149145886046b79b')
+}
+Assignment14> db.Cricketer.insertOne({  name: "ahmed", matches:192, runs:5502,catches: 111,stumping:11});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335f0e149145886046b79c')
+}
+Assignment14> db.Cricketer.insertOne({  name: "ahmed", matches:192, runs:5502,wicket:13,catches: 71});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335f34149145886046b79d')
+}
+Assignment14> db.Cricketer.insertOne({  name: "prem", matches:57, runs:1054,wicket:69,catches: 55});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66335f57149145886046b79e')
+}
+
+
+Assignment14> db.Cricketer.updateOne({name:'ram'}, {$set :{runs:6390}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Assignment14> db.Cricketer.updateOne({name:'ahmed'}, {$set :{wickets:13}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Assignment14> db.Cricketer.find().pretty()
+[
+  {
+    _id: ObjectId('66335e8b149145886046b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  },
+  {
+    _id: ObjectId('66335eb5149145886046b79a'),
+    name: 'Vijay',
+    matches: 32,
+    runs: 4205,
+    catches: 11
+  },
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 230,
+    runs: 6390,
+    catches: 105
+  },
+  {
+    _id: ObjectId('66335f0e149145886046b79c'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    catches: 111,
+    stumping: 11,
+    wickets: 13
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    wicket: 13,
+    catches: 71
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  }
+]
+Assignment14> db.Cricketer.updateOne({name:'ahmed'}, {$set :{wicket:13}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Assignment14> db.Cricketer.find().pretty()
+[
+  {
+    _id: ObjectId('66335e8b149145886046b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  },
+  {
+    _id: ObjectId('66335eb5149145886046b79a'),
+    name: 'Vijay',
+    matches: 32,
+    runs: 4205,
+    catches: 11
+  },
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 230,
+    runs: 6390,
+    catches: 105
+  },
+  {
+    _id: ObjectId('66335f0e149145886046b79c'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    catches: 111,
+    stumping: 11,
+    wickets: 13,
+    wicket: 13
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    wicket: 13,
+    catches: 71
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  }
+]
+Assignment14> db.Cricketer.deleteOne({name:'ahmed'})
+{ acknowledged: true, deletedCount: 1 }
+Assignment14> db.Cricketer.find().pretty()
+[
+  {
+    _id: ObjectId('66335e8b149145886046b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  },
+  {
+    _id: ObjectId('66335eb5149145886046b79a'),
+    name: 'Vijay',
+    matches: 32,
+    runs: 4205,
+    catches: 11
+  },
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 230,
+    runs: 6390,
+    catches: 105
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    wicket: 13,
+    catches: 71
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  }
+]
+Assignment14> db.Cricketer.updateOne({name:'ahmed'}, {$set :{catches:111,stumpings:11}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Assignment14> db.Cricketer.find().pretty()
+[
+  {
+    _id: ObjectId('66335e8b149145886046b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  },
+  {
+    _id: ObjectId('66335eb5149145886046b79a'),
+    name: 'Vijay',
+    matches: 32,
+    runs: 4205,
+    catches: 11
+  },
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 230,
+    runs: 6390,
+    catches: 105
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    wicket: 13,
+    catches: 111,
+    stumpings: 11
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  }
+]
+Assignment14> db.Cricketer.insertOne({  name: "akshay", matches:101, runs:699,wicket:89,catches: 71});
+{
+  acknowledged: true,
+  insertedId: ObjectId('663361b1149145886046b79f')
+}
+Assignment14> db.Cricketer.find().pretty()
+[
+  {
+    _id: ObjectId('66335e8b149145886046b799'),
+    name: 'Ajay',
+    matches: 58,
+    runs: 2009,
+    catches: 32
+  },
+  {
+    _id: ObjectId('66335eb5149145886046b79a'),
+    name: 'Vijay',
+    matches: 32,
+    runs: 4205,
+    catches: 11
+  },
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 230,
+    runs: 6390,
+    catches: 105
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    wicket: 13,
+    catches: 111,
+    stumpings: 11
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  },
+  {
+    _id: ObjectId('663361b1149145886046b79f'),
+    name: 'akshay',
+    matches: 101,
+    runs: 699,
+    wicket: 89,
+    catches: 71
+  }
+]
+Assignment14>
+
+
+Assignment14> db.Cricketer.find({wicket:{$exists:1}})
+[
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    catches: 111,
+    stumpings: 11,
+    wicket: 13
+  },
+  {
+    _id: ObjectId('66335f57149145886046b79e'),
+    name: 'prem',
+    matches: 57,
+    runs: 1054,
+    wicket: 69,
+    catches: 55
+  },
+  {
+    _id: ObjectId('663363a7149145886046b7a0'),
+    name: 'akshay',
+    matches: 101,
+    runs: 699,
+    catches: 71,
+    wicket: 89
+  }
+]
+
+
+Assignment14> db.Cricketer.find({stumpings:{$exists:1}})
+[
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    catches: 111,
+    stumpings: 11
+  }
+]
+
+
+Assignment14> db.Cricketer.updateMany({stumpings:{$exists:true}},{$unset:{wicket:1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+
+
+
+
+Assignment14> db.Cricketer.updateOne({name:"ram"},{$set:{matches:61, wicket: 71}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+
+Assignment14> db.Cricketer.find({catches:{$gt:100}})
+[
+  {
+    _id: ObjectId('66335ede149145886046b79b'),
+    name: 'ram',
+    matches: 61,
+    runs: 6390,
+    catches: 105,
+    wicket: 71
+  },
+  {
+    _id: ObjectId('66335f34149145886046b79d'),
+    name: 'ahmed',
+    matches: 192,
+    runs: 5502,
+    catches: 111,
+    stumpings: 11
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
