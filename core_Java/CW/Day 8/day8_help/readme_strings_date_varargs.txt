@@ -48,6 +48,24 @@ Formatting details
 %tc  -- Time stamp(date & Time)
 %td-%1$tb-%1$tY -- can be applied to GC or Date. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Date/Time Handling in Java(legacy API)
 
 API
