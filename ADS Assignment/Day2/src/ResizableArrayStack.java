@@ -1,7 +1,7 @@
-// Generic Stack Implementation using a Resizable Array
+//JDK 16 used
 public class ResizableArrayStack<T> implements StackADT<T> {
-    private T[] stack;       // Array to hold the stack elements
-    private int size;        // Number of elements in the stack
+    private T[] stack;      
+    private int size;       
 
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -14,7 +14,7 @@ public class ResizableArrayStack<T> implements StackADT<T> {
     @Override
     public void push(T item) {
         if (size == stack.length) {
-            resize(2 * stack.length);  // Double the array size if full
+            resize(2 * stack.length);  
         }
         stack[size++] = item;
     }
@@ -25,9 +25,9 @@ public class ResizableArrayStack<T> implements StackADT<T> {
             throw new IllegalStateException("Stack is empty");
         }
         T item = stack[--size];
-        stack[size] = null;  // Avoid loitering
+        stack[size] = null; 
         if (size > 0 && size == stack.length / 4) {
-            resize(stack.length / 2);  // Shrink the array size if it's a quarter full
+            resize(stack.length / 2); 
         }
         return item;
     }
@@ -64,17 +64,17 @@ public class ResizableArrayStack<T> implements StackADT<T> {
         stack.push(2);
         stack.push(3);
 
-        System.out.println("Stack size: " + stack.size());  // Output: Stack size: 3
-        System.out.println("Top element: " + stack.peek()); // Output: Top element: 3
+        System.out.println("Stack size: " + stack.size()); 
+        System.out.println("Top element: " + stack.peek());
 
-        System.out.println("Popped element: " + stack.pop()); // Output: Popped element: 3
-        System.out.println("Stack size after pop: " + stack.size()); // Output: Stack size after pop: 2
+        System.out.println("Popped element: " + stack.pop());
+        System.out.println("Stack size after pop: " + stack.size()); 
 
-        System.out.println("Is stack empty? " + stack.isEmpty()); // Output: Is stack empty? false
+        System.out.println("Is stack empty? " + stack.isEmpty()); 
 
         stack.pop();
         stack.pop();
 
-        System.out.println("Is stack empty after popping all elements? " + stack.isEmpty()); // Output: Is stack empty after popping all elements? true
+        System.out.println("Is stack empty after popping all elements? " + stack.isEmpty()); 
     }
 }
